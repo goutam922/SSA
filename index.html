@@ -804,14 +804,14 @@
   });
 
   // --- SPREADSHEET FORM SUBMISSION HANDLER ---
-  const scriptURL = 'YOUR_SPREADSHEET_API_URL_HERE'; // <-- Replace with your Google Apps Script URL
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbw6Kw6e1u-4iv1htgY0I02BwlK7GfqxCPv66BmtChWZ0ysJm0xPsBgcVMd3dps4ZiYC9A/exec'; // <-- Replace with your Google Apps Script URL
   const form = document.forms['contact-form'];
   const submitBtn = document.getElementById('submit-btn');
 
   form.addEventListener('submit', e => {
     e.preventDefault();
     
-    if(scriptURL === 'https://script.google.com/macros/s/AKfycbw6Kw6e1u-4iv1htgY0I02BwlK7GfqxCPv66BmtChWZ0ysJm0xPsBgcVMd3dps4ZiYC9A/exec') {
+    if(scriptURL === 'https://script.google.com/macros/s/AKfycbw6Kw6e1u-4iv1htgY0I02BwlK7GfqxCPv66BmtChWZ0ysJm0xPsBgcVMd3dps4ZiYC9A/exechttps://script.google.com/macros/s/AKfycbw6Kw6e1u-4iv1htgY0I02BwlK7GfqxCPv66BmtChWZ0ysJm0xPsBgcVMd3dps4ZiYC9A/exec') {
       alert("Please update the 'scriptURL' in the HTML code with your Google Apps Script Web App URL.");
       return;
     }
