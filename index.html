@@ -14,11 +14,11 @@
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@500;700;800&display=swap');
 
     :root {
-      --bg-base: #030712; 
-      --card-bg: rgba(255, 255, 255, 0.02);
-      --card-border: rgba(255, 255, 255, 0.06);
-      --accent-primary: #3b82f6; 
-      --accent-glow: rgba(59, 130, 246, 0.15);
+      --bg-base: #0b0c10; 
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent-red: #D82128; 
+      --accent-green: #90C340; 
       --text-main: #f9fafb;
       --text-muted: #9ca3af;
     }
@@ -39,12 +39,11 @@
       position: relative;
     }
 
-    /* GLOBAL MOUSE TRACKING AURA */
     #mouse-aura {
       position: fixed;
       top: 0; left: 0;
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
+      width: 800px; height: 800px;
+      background: radial-gradient(circle, rgba(144, 195, 64, 0.08) 0%, rgba(216, 33, 40, 0.05) 30%, transparent 60%);
       border-radius: 50%;
       pointer-events: none;
       transform: translate(-50%, -50%);
@@ -66,23 +65,23 @@
     }
 
     .text-gradient {
-      background: linear-gradient(135deg, #ffffff 0%, #9ca3af 100%);
+      background: linear-gradient(135deg, var(--accent-green) 0%, var(--accent-red) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    /* NAVBAR */
     header {
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(3, 7, 18, 0.7);
+      background: rgba(11, 12, 16, 0.85);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--card-border);
+      transition: all 0.3s ease;
     }
 
     nav {
-      min-height: 80px;
+      min-height: 90px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -91,23 +90,17 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-family: 'Manrope', sans-serif;
-      font-weight: 800;
-      font-size: 20px;
-      letter-spacing: -0.5px;
+      transition: transform 0.3s ease;
+    }
+    
+    .logo:hover {
+      transform: scale(1.02);
     }
 
-    .logo-mark {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      background: var(--text-main);
-      display: grid;
-      place-items: center;
-      color: var(--bg-base);
-      font-weight: 800;
-      font-size: 16px;
+    .logo img {
+      height: 55px; 
+      width: auto;
+      object-fit: contain;
     }
 
     .nav-links {
@@ -119,9 +112,27 @@
       color: var(--text-muted);
     }
 
-    .nav-links a:hover {
+    .nav-links a {
+      position: relative;
+    }
+
+    .nav-links a:not(.btn)::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent-green);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:not(.btn):hover {
       color: var(--text-main);
-      transition: color 0.2s ease;
+    }
+
+    .nav-links a:not(.btn):hover::after {
+      width: 100%;
     }
 
     .btn {
@@ -131,50 +142,55 @@
       padding: 12px 24px;
       border-radius: 8px;
       font-family: 'Inter', sans-serif;
-      font-weight: 500;
+      font-weight: 600;
       font-size: 14px;
       border: none;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
 
     .btn-primary {
-      background: var(--text-main);
-      color: var(--bg-base);
+      background: var(--accent-red);
+      color: #fff;
+      box-shadow: 0 4px 15px rgba(216, 33, 40, 0.2);
     }
 
     .btn-primary:hover {
-      background: #e5e7eb;
+      background: #bf1d23;
       transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(216, 33, 40, 0.3);
     }
 
     .btn-outline {
       background: transparent;
-      border: 1px solid var(--card-border);
-      color: var(--text-main);
+      border: 1px solid var(--accent-green);
+      color: var(--accent-green);
     }
 
     .btn-outline:hover {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(144, 195, 64, 0.1);
+      transform: translateY(-2px);
     }
 
     .menu {
       display: none;
       font-size: 24px;
       cursor: pointer;
+      color: var(--accent-green);
     }
 
-    /* HERO SECTION */
     .hero {
       padding: 140px 0 100px;
     }
 
     .eyebrow {
-      color: var(--accent-primary);
+      color: var(--accent-green);
       text-transform: uppercase;
       letter-spacing: 2px;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 24px;
       display: inline-block;
     }
@@ -202,14 +218,13 @@
       gap: 16px;
     }
 
-    /* INTERACTIVE MOUSE TRACKING CARDS */
     .interactive-card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 16px;
       position: relative;
       overflow: hidden;
-      transition: border-color 0.3s ease;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
     .interactive-card::before {
@@ -218,7 +233,7 @@
       top: 0; left: 0; right: 0; bottom: 0;
       background: radial-gradient(
         400px circle at var(--mouse-x, 0) var(--mouse-y, 0), 
-        rgba(255, 255, 255, 0.08), 
+        rgba(144, 195, 64, 0.1), 
         transparent 40%
       );
       opacity: 0;
@@ -232,7 +247,9 @@
     }
 
     .interactive-card:hover {
-      border-color: rgba(255, 255, 255, 0.15);
+      border-color: rgba(144, 195, 64, 0.3);
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0,0,0, 0.2);
     }
 
     .card-content {
@@ -242,7 +259,6 @@
       height: 100%;
     }
 
-    /* STATS */
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -257,9 +273,9 @@
 
     .stat strong {
       display: block;
-      font-size: 32px;
+      font-size: 36px;
       font-family: 'Manrope', sans-serif;
-      color: var(--text-main);
+      color: var(--accent-green);
       margin-bottom: 4px;
     }
 
@@ -270,7 +286,6 @@
       letter-spacing: 1px;
     }
 
-    /* SECTIONS */
     section {
       padding: 100px 0;
     }
@@ -288,7 +303,6 @@
       margin-bottom: 12px;
     }
 
-    /* SERVICES */
     .service-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -296,24 +310,31 @@
     }
 
     .service-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text-main);
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: rgba(216, 33, 40, 0.1);
+      color: var(--accent-red);
       display: grid;
       place-items: center;
       font-family: 'Manrope', sans-serif;
       font-weight: 700;
-      font-size: 16px;
+      font-size: 18px;
       margin-bottom: 24px;
-      border: 1px solid var(--card-border);
+      border: 1px solid rgba(216, 33, 40, 0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .interactive-card:hover .service-icon {
+      background: var(--accent-red);
+      color: white;
+      transform: scale(1.1) rotate(5deg);
     }
 
     .service-card h3 {
       font-family: 'Manrope', sans-serif;
       margin-bottom: 10px;
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 600;
     }
 
@@ -323,11 +344,10 @@
       font-weight: 300;
     }
 
-    /* TICKER */
     .ticker-wrap {
       width: 100%;
       overflow: hidden;
-      background: var(--bg-base);
+      background: rgba(255, 255, 255, 0.02);
       border-top: 1px solid var(--card-border);
       border-bottom: 1px solid var(--card-border);
       padding: 30px 0;
@@ -345,16 +365,26 @@
       font-weight: 600;
       color: var(--text-muted);
     }
+    
+    .ticker:hover {
+      animation-play-state: paused;
+    }
 
     .ticker span {
       display: inline-flex;
       align-items: center;
       gap: 60px;
+      transition: color 0.3s ease;
+      cursor: default;
+    }
+    
+    .ticker span:hover {
+      color: var(--accent-green);
     }
 
     .ticker span::after {
       content: '•';
-      color: var(--card-border);
+      color: var(--accent-red);
     }
 
     @keyframes scroll {
@@ -362,7 +392,6 @@
       100% { transform: translateX(-50%); }
     }
 
-    /* CONTACT FORM */
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -377,11 +406,17 @@
       margin-top: 24px;
       font-size: 15px;
       color: var(--text-muted);
+      transition: transform 0.2s ease;
+    }
+    
+    .contact-info-item:hover {
+      transform: translateX(10px);
+      color: var(--text-main);
     }
 
     .contact-info-item span {
-      color: var(--text-main);
-      font-size: 18px;
+      color: var(--accent-green);
+      font-size: 20px;
     }
 
     form {
@@ -399,12 +434,13 @@
       font-family: inherit;
       font-size: 14px;
       outline: none;
-      transition: border-color 0.3s;
+      transition: all 0.3s;
     }
 
     input:focus, select:focus, textarea:focus {
-      border-color: rgba(255, 255, 255, 0.3);
-      background: rgba(255, 255, 255, 0.04);
+      border-color: var(--accent-green);
+      background: rgba(144, 195, 64, 0.03);
+      box-shadow: 0 0 0 4px rgba(144, 195, 64, 0.1);
     }
 
     textarea {
@@ -412,10 +448,10 @@
       resize: vertical;
     }
 
-    /* FOOTER */
     footer {
       border-top: 1px solid var(--card-border);
       padding: 80px 0 40px;
+      background: #07080a;
     }
 
     .footer-grid {
@@ -440,16 +476,31 @@
     }
 
     footer a:hover {
-      color: var(--text-main);
+      color: var(--accent-red);
     }
 
     .copyright {
       margin-top: 60px;
       color: var(--text-muted);
       font-size: 13px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--card-border);
+      padding-top: 20px;
     }
 
-    /* RESPONSIVE */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease-out;
+    }
+    
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     @media (max-width: 992px) {
       .contact-grid { grid-template-columns: 1fr; gap: 40px;}
       .service-grid { grid-template-columns: repeat(2, 1fr); }
@@ -460,13 +511,14 @@
       .nav-links {
         display: none;
         position: absolute;
-        top: 80px; left: 0; right: 0;
-        background: rgba(3, 7, 18, 0.95);
+        top: 90px; left: 0; right: 0;
+        background: rgba(11, 12, 16, 0.98);
         backdrop-filter: blur(10px);
-        border-bottom: 1px solid var(--card-border);
+        border-bottom: 1px solid var(--accent-red);
         flex-direction: column;
         padding: 30px;
         align-items: flex-start;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
       }
       .nav-links.active { display: flex; }
       .menu { display: block; }
@@ -478,15 +530,13 @@
 
 <body>
 
-<!-- GLOBAL BACKGROUND MOUSE TRACKER -->
 <div id="mouse-aura"></div>
 
-<header>
+<header id="header">
   <div class="container">
     <nav>
       <a href="#home" class="logo">
-        <span class="logo-mark">SS</span>
-        <span>Shree Shyam Accounts</span>
+        <img src="watermarked_img_438985077642189029.png" alt="Shree Shyam Accounts Logo">
       </a>
       <div class="menu" onclick="toggleMenu()">☰</div>
       <div class="nav-links" id="navLinks">
@@ -501,9 +551,8 @@
 
 <main>
 
-<!-- HERO -->
 <section class="hero" id="home">
-  <div class="container">
+  <div class="container reveal">
     <div class="eyebrow">Professional Financial Infrastructure</div>
     <h1>
       Precision Accounting <br/>
@@ -519,8 +568,7 @@
   </div>
 </section>
 
-<!-- TICKER -->
-<div class="ticker-wrap">
+<div class="ticker-wrap reveal">
   <div class="ticker">
     <span>Tally Prime Integration</span>
     <span>Busy Accounting ERP</span>
@@ -528,7 +576,6 @@
     <span>Cloud Bookkeeping</span>
     <span>TDS Reconciliation</span>
     <span>Financial Audits</span>
-    <!-- Duplicate for infinite loop -->
     <span>Tally Prime Integration</span>
     <span>Busy Accounting ERP</span>
     <span>GST Portal Sync</span>
@@ -538,28 +585,27 @@
   </div>
 </div>
 
-<!-- STATS -->
 <section style="padding: 40px 0;">
   <div class="container stats-grid">
-    <div class="interactive-card stat">
+    <div class="interactive-card stat reveal">
       <div class="card-content">
         <strong>3+</strong>
         <span>Years Experience</span>
       </div>
     </div>
-    <div class="interactive-card stat">
+    <div class="interactive-card stat reveal" style="transition-delay: 0.1s;">
       <div class="card-content">
         <strong>100%</strong>
         <span>Compliance Rate</span>
       </div>
     </div>
-    <div class="interactive-card stat">
+    <div class="interactive-card stat reveal" style="transition-delay: 0.2s;">
       <div class="card-content">
         <strong>Accurate</strong>
         <span>Reconciliations</span>
       </div>
     </div>
-    <div class="interactive-card stat">
+    <div class="interactive-card stat reveal" style="transition-delay: 0.3s;">
       <div class="card-content">
         <strong>Timely</strong>
         <span>Tax Filings</span>
@@ -568,58 +614,51 @@
   </div>
 </section>
 
-<!-- SERVICES -->
 <section id="services">
   <div class="container">
-    <div class="section-head">
+    <div class="section-head reveal">
       <div class="eyebrow">Core Modules</div>
       <h2>Comprehensive Services</h2>
       <p style="color: var(--text-muted)">A full suite of financial tools and compliance solutions designed to keep your business operating flawlessly.</p>
     </div>
 
     <div class="service-grid">
-      <!-- Service Card 1 -->
-      <div class="interactive-card service-card">
+      <div class="interactive-card service-card reveal">
         <div class="card-content">
           <div class="service-icon">01</div>
           <h3>GST Architecture</h3>
           <p>Seamless GST registration, robust return preparation, and automated ITC reconciliations.</p>
         </div>
       </div>
-      <!-- Service Card 2 -->
-      <div class="interactive-card service-card">
+      <div class="interactive-card service-card reveal" style="transition-delay: 0.1s;">
         <div class="card-content">
           <div class="service-icon">02</div>
           <h3>Tax Computation</h3>
           <p>Strategic ITR preparation and filing frameworks for individuals and corporate entities.</p>
         </div>
       </div>
-      <!-- Service Card 3 -->
-      <div class="interactive-card service-card">
+      <div class="interactive-card service-card reveal" style="transition-delay: 0.2s;">
         <div class="card-content">
           <div class="service-icon">03</div>
           <h3>TDS / TCS Protocols</h3>
           <p>Accurate deduction calculations, digital records maintenance, and portal submissions.</p>
         </div>
       </div>
-      <!-- Service Card 4 -->
-      <div class="interactive-card service-card">
+      <div class="interactive-card service-card reveal">
         <div class="card-content">
           <div class="service-icon">04</div>
           <h3>Digital Bookkeeping</h3>
           <p>Flawless day-to-day accounting maintained on modern ERP systems tailored to you.</p>
         </div>
       </div>
-      <!-- Service Card 5 -->
-      <div class="interactive-card service-card">
+      <div class="interactive-card service-card reveal" style="transition-delay: 0.1s;">
         <div class="card-content">
           <div class="service-icon">05</div>
           <h3>Bank Reconciliation</h3>
           <p>Rigorous matching of bank statements against internal ledgers to prevent discrepancies.</p>
         </div>
       </div>
-      <!-- Service Card 6 -->
-      <div class="interactive-card service-card">
+      <div class="interactive-card service-card reveal" style="transition-delay: 0.2s;">
         <div class="card-content">
           <div class="service-icon">06</div>
           <h3>Entity Registration</h3>
@@ -630,12 +669,11 @@
   </div>
 </section>
 
-<!-- CONTACT -->
 <section id="contact" style="border-top: 1px solid var(--card-border);">
   <div class="container">
     <div class="contact-grid">
       
-      <div>
+      <div class="reveal">
         <div class="eyebrow">Establish Connection</div>
         <h2 style="font-family: 'Manrope'; font-size: 40px; margin-bottom: 20px; line-height: 1.1;">Ready to upgrade your accounting?</h2>
         <p style="color: var(--text-muted); margin-bottom: 40px;">Send us your operational requirements, and we will structure a custom solution for your business.</p>
@@ -651,7 +689,7 @@
         </div>
       </div>
 
-      <div class="interactive-card">
+      <div class="interactive-card reveal" style="transition-delay: 0.2s;">
         <div class="card-content">
           <form name="contact-form" id="contact-form">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
@@ -683,10 +721,10 @@
 </main>
 
 <footer>
-  <div class="container">
+  <div class="container reveal">
     <div class="footer-grid">
       <div>
-        <h3>Shree Shyam Accounts</h3>
+        <img src="watermarked_img_438985077642189029.png" alt="Shree Shyam Accounts Logo" style="height: 40px; margin-bottom: 15px; filter: grayscale(1) brightness(2);">
         <p style="color: var(--text-muted); font-size: 14px; padding-right: 20px;">
           Modern financial infrastructure, delivering high-precision accounting and taxation compliance.
         </p>
@@ -704,13 +742,13 @@
       </div>
     </div>
     <div class="copyright">
-      © 2026 Shree Shyam Accounts. All rights reserved.
+      <span>© 2026 Shree Shyam Accounts. All rights reserved.</span>
+      <span style="color: var(--accent-green); font-weight: 600;">Designed for Precision.</span>
     </div>
   </div>
 </footer>
 
 <script>
-  // Mobile Menu Toggle
   function toggleMenu() {
     document.getElementById("navLinks").classList.toggle("active");
   }
@@ -720,7 +758,6 @@
     });
   });
 
-  // Global Mouse Aura Tracking
   const mouseAura = document.getElementById('mouse-aura');
   document.body.addEventListener('mousemove', (e) => {
     mouseAura.style.opacity = '1';
@@ -731,7 +768,6 @@
     mouseAura.style.opacity = '0';
   });
 
-  // Interactive Card Spotlight Tracking
   document.querySelectorAll('.interactive-card').forEach(card => {
     card.addEventListener('mousemove', e => {
       const rect = card.getBoundingClientRect();
@@ -742,8 +778,31 @@
     });
   });
 
-  // Spreadsheet API Form Submission
-  // Replace this URL with your Google Apps Script URL or SheetDB API URL
+  function reveal() {
+    var reveals = document.querySelectorAll(".reveal");
+    for (var i = 0; i < reveals.length; i++) {
+      var windowHeight = window.innerHeight;
+      var elementTop = reveals[i].getBoundingClientRect().top;
+      var elementVisible = 100;
+      if (elementTop < windowHeight - elementVisible) {
+        reveals[i].classList.add("active");
+      }
+    }
+  }
+  window.addEventListener("scroll", reveal);
+  reveal();
+
+  window.addEventListener("scroll", () => {
+    const header = document.getElementById("header");
+    if (window.scrollY > 50) {
+      header.style.padding = "5px 0";
+      header.style.boxShadow = "0 4px 30px rgba(0, 0, 0, 0.5)";
+    } else {
+      header.style.padding = "0";
+      header.style.boxShadow = "none";
+    }
+  });
+
   const scriptURL = 'YOUR_SPREADSHEET_API_URL_HERE';
   const form = document.forms['contact-form'];
   const submitBtn = document.getElementById('submit-btn');
@@ -751,9 +810,8 @@
   form.addEventListener('submit', e => {
     e.preventDefault();
     
-    // Check if the URL was updated
-    if(scriptURL === 'https://script.google.com/macros/s/AKfycbw6Kw6e1u-4iv1htgY0I02BwlK7GfqxCPv66BmtChWZ0ysJm0xPsBgcVMd3dps4ZiYC9A/exec') {
-      alert("Please update the 'scriptURL' in the HTML file with your actual Spreadsheet API URL.");
+    if(scriptURL === 'YOUR_SPREADSHEET_API_URL_HERE') {
+      alert("Please update the 'scriptURL' in the HTML file with your actual Google Sheet/API URL.");
       return;
     }
 
