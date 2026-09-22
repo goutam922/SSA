@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Shree Shyam Accounts | Modern Accounting Services</title>
+  <meta
+    name="description"
+    content="Next-Gen accounting, GST, ITR, TDS, bookkeeping and business compliance services in Abohar, Punjab."
+  />
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Manrope:wght@500;700;800&display=swap');
+
+    :root {
+      --bg-base: #030712; 
+      --card-bg: rgba(255, 255, 255, 0.02);
+      --card-border: rgba(255, 255, 255, 0.06);
+      --accent-primary: #3b82f6; 
+      --accent-glow: rgba(59, 130, 246, 0.15);
+      --text-main: #f9fafb;
+      --text-muted: #9ca3af;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-main);
+      background-color: var(--bg-base);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* GLOBAL MOUSE TRACKING AURA */
+    #mouse-aura {
+      position: fixed;
+      top: 0; left: 0;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
+      border-radius: 50%;
+      pointer-events: none;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .text-gradient {
+      background: linear-gradient(135deg, #ffffff 0%, #9ca3af 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* NAVBAR */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(3, 7, 18, 0.7);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    nav {
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-mark {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--text-main);
+      display: grid;
+      place-items: center;
+      color: var(--bg-base);
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 35px;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+      transition: color 0.2s ease;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--text-main);
+      color: var(--bg-base);
+    }
+
+    .btn-primary:hover {
+      background: #e5e7eb;
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text-main);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .menu {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      padding: 140px 0 100px;
+    }
+
+    .eyebrow {
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      display: inline-block;
+    }
+
+    h1 {
+      font-family: 'Manrope', sans-serif;
+      font-size: clamp(48px, 6vw, 72px);
+      font-weight: 800;
+      line-height: 1.05;
+      margin-bottom: 24px;
+      letter-spacing: -1.5px;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 18px;
+      margin-bottom: 40px;
+      max-width: 600px;
+      font-weight: 300;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    /* INTERACTIVE MOUSE TRACKING CARDS */
+    .interactive-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s ease;
+    }
+
+    .interactive-card::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(
+        400px circle at var(--mouse-x, 0) var(--mouse-y, 0), 
+        rgba(255, 255, 255, 0.08), 
+        transparent 40%
+      );
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .interactive-card:hover::before {
+      opacity: 1;
+    }
+
+    .interactive-card:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .card-content {
+      position: relative;
+      z-index: 2;
+      padding: 35px;
+      height: 100%;
+    }
+
+    /* STATS */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 40px 0;
+    }
+
+    .stat .card-content {
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 32px;
+      font-family: 'Manrope', sans-serif;
+      color: var(--text-main);
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 100px 0;
+    }
+
+    .section-head {
+      margin-bottom: 60px;
+      max-width: 600px;
+    }
+
+    .section-head h2 {
+      font-family: 'Manrope', sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 12px;
+    }
+
+    /* SERVICES */
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .service-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      display: grid;
+      place-items: center;
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      margin-bottom: 24px;
+      border: 1px solid var(--card-border);
+    }
+
+    .service-card h3 {
+      font-family: 'Manrope', sans-serif;
+      margin-bottom: 10px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .service-card p {
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 300;
+    }
+
+    /* TICKER */
+    .ticker-wrap {
+      width: 100%;
+      overflow: hidden;
+      background: var(--bg-base);
+      border-top: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--card-border);
+      padding: 30px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .ticker {
+      display: flex;
+      gap: 60px;
+      white-space: nowrap;
+      animation: scroll 25s linear infinite;
+      font-family: 'Manrope', sans-serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .ticker span {
+      display: inline-flex;
+      align-items: center;
+      gap: 60px;
+    }
+
+    .ticker span::after {
+      content: '•';
+      color: var(--card-border);
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* CONTACT FORM */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .contact-info-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 24px;
+      font-size: 15px;
+      color: var(--text-muted);
+    }
+
+    .contact-info-item span {
+      color: var(--text-main);
+      font-size: 18px;
+    }
+
+    form {
+      display: grid;
+      gap: 20px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      color: white;
+      padding: 16px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 80px 0 40px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 50px;
+    }
+
+    footer h3 {
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      margin-bottom: 24px;
+      color: var(--text-main);
+    }
+
+    footer a {
+      display: block;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    footer a:hover {
+      color: var(--text-main);
+    }
+
+    .copyright {
+      margin-top: 60px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 992px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 40px;}
+      .service-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 80px; left: 0; right: 0;
+        background: rgba(3, 7, 18, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--card-border);
+        flex-direction: column;
+        padding: 30px;
+        align-items: flex-start;
+      }
+      .nav-links.active { display: flex; }
+      .menu { display: block; }
+      .service-grid, .footer-grid { grid-template-columns: 1fr; }
+      #mouse-aura { display: none; } 
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- GLOBAL BACKGROUND MOUSE TRACKER -->
+<div id="mouse-aura"></div>
+
+<header>
+  <div class="container">
+    <nav>
+      <a href="#home" class="logo">
+        <span class="logo-mark">SS</span>
+        <span>Shree Shyam Accounts</span>
+      </a>
+      <div class="menu" onclick="toggleMenu()">☰</div>
+      <div class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+        <a href="#contact" class="btn btn-primary">Get in Touch</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="container">
+    <div class="eyebrow">Professional Financial Infrastructure</div>
+    <h1>
+      Precision Accounting <br/>
+      <span class="text-gradient">for Modern Business.</span>
+    </h1>
+    <p>
+      We deliver hyper-accurate GST, ITR, Bookkeeping, and Business Compliance utilizing industry-standard technology and meticulous expertise.
+    </p>
+    <div class="hero-buttons">
+      <a href="#contact" class="btn btn-primary">Free Consultation</a>
+      <a href="#services" class="btn btn-outline">Explore Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span>Tally Prime Integration</span>
+    <span>Busy Accounting ERP</span>
+    <span>GST Portal Sync</span>
+    <span>Cloud Bookkeeping</span>
+    <span>TDS Reconciliation</span>
+    <span>Financial Audits</span>
+    <!-- Duplicate for infinite loop -->
+    <span>Tally Prime Integration</span>
+    <span>Busy Accounting ERP</span>
+    <span>GST Portal Sync</span>
+    <span>Cloud Bookkeeping</span>
+    <span>TDS Reconciliation</span>
+    <span>Financial Audits</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<section style="padding: 40px 0;">
+  <div class="container stats-grid">
+    <div class="interactive-card stat">
+      <div class="card-content">
+        <strong>3+</strong>
+        <span>Years Experience</span>
+      </div>
+    </div>
+    <div class="interactive-card stat">
+      <div class="card-content">
+        <strong>100%</strong>
+        <span>Compliance Rate</span>
+      </div>
+    </div>
+    <div class="interactive-card stat">
+      <div class="card-content">
+        <strong>Accurate</strong>
+        <span>Reconciliations</span>
+      </div>
+    </div>
+    <div class="interactive-card stat">
+      <div class="card-content">
+        <strong>Timely</strong>
+        <span>Tax Filings</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-head">
+      <div class="eyebrow">Core Modules</div>
+      <h2>Comprehensive Services</h2>
+      <p style="color: var(--text-muted)">A full suite of financial tools and compliance solutions designed to keep your business operating flawlessly.</p>
+    </div>
+
+    <div class="service-grid">
+      <!-- Service Card 1 -->
+      <div class="interactive-card service-card">
+        <div class="card-content">
+          <div class="service-icon">01</div>
+          <h3>GST Architecture</h3>
+          <p>Seamless GST registration, robust return preparation, and automated ITC reconciliations.</p>
+        </div>
+      </div>
+      <!-- Service Card 2 -->
+      <div class="interactive-card service-card">
+        <div class="card-content">
+          <div class="service-icon">02</div>
+          <h3>Tax Computation</h3>
+          <p>Strategic ITR preparation and filing frameworks for individuals and corporate entities.</p>
+        </div>
+      </div>
+      <!-- Service Card 3 -->
+      <div class="interactive-card service-card">
+        <div class="card-content">
+          <div class="service-icon">03</div>
+          <h3>TDS / TCS Protocols</h3>
+          <p>Accurate deduction calculations, digital records maintenance, and portal submissions.</p>
+        </div>
+      </div>
+      <!-- Service Card 4 -->
+      <div class="interactive-card service-card">
+        <div class="card-content">
+          <div class="service-icon">04</div>
+          <h3>Digital Bookkeeping</h3>
+          <p>Flawless day-to-day accounting maintained on modern ERP systems tailored to you.</p>
+        </div>
+      </div>
+      <!-- Service Card 5 -->
+      <div class="interactive-card service-card">
+        <div class="card-content">
+          <div class="service-icon">05</div>
+          <h3>Bank Reconciliation</h3>
+          <p>Rigorous matching of bank statements against internal ledgers to prevent discrepancies.</p>
+        </div>
+      </div>
+      <!-- Service Card 6 -->
+      <div class="interactive-card service-card">
+        <div class="card-content">
+          <div class="service-icon">06</div>
+          <h3>Entity Registration</h3>
+          <p>End-to-end operational setup for new businesses, MSME certificates, and Trademarks.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="border-top: 1px solid var(--card-border);">
+  <div class="container">
+    <div class="contact-grid">
+      
+      <div>
+        <div class="eyebrow">Establish Connection</div>
+        <h2 style="font-family: 'Manrope'; font-size: 40px; margin-bottom: 20px; line-height: 1.1;">Ready to upgrade your accounting?</h2>
+        <p style="color: var(--text-muted); margin-bottom: 40px;">Send us your operational requirements, and we will structure a custom solution for your business.</p>
+
+        <div class="contact-info-item">
+          <span>📍</span> Abohar, Punjab, India
+        </div>
+        <div class="contact-info-item">
+          <span>📞</span> +91 62806 74485
+        </div>
+        <div class="contact-info-item">
+          <span>✉</span> shreeshaymaccount@yahoo.com
+        </div>
+      </div>
+
+      <div class="interactive-card">
+        <div class="card-content">
+          <form name="contact-form" id="contact-form">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <input type="text" name="Name" required placeholder="Full Name">
+              <input type="tel" name="Phone" required placeholder="Phone Number">
+            </div>
+            
+            <select name="Service">
+              <option value="GST Services">GST Services</option>
+              <option value="Income Tax Return (ITR)">Income Tax Return (ITR)</option>
+              <option value="Digital Bookkeeping">Digital Bookkeeping</option>
+              <option value="Business Registration">Business Registration</option>
+              <option value="Other Enquiry">Other Enquiry</option>
+            </select>
+
+            <textarea name="Message" placeholder="How can we assist you?"></textarea>
+            
+            <button id="submit-btn" class="btn btn-primary" type="submit" style="width: 100%; padding: 16px; margin-top: 10px;">
+              Submit Request
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h3>Shree Shyam Accounts</h3>
+        <p style="color: var(--text-muted); font-size: 14px; padding-right: 20px;">
+          Modern financial infrastructure, delivering high-precision accounting and taxation compliance.
+        </p>
+      </div>
+      <div>
+        <h3>Navigation</h3>
+        <a href="#home">Overview</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div>
+        <h3>Contact</h3>
+        <a href="mailto:shreeshaymaccount@yahoo.com">shreeshaymaccount@yahoo.com</a>
+        <a href="tel:+916280674485">+91 62806 74485</a>
+      </div>
+    </div>
+    <div class="copyright">
+      © 2026 Shree Shyam Accounts. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile Menu Toggle
+  function toggleMenu() {
+    document.getElementById("navLinks").classList.toggle("active");
+  }
+  document.querySelectorAll(".nav-links a").forEach(link => {
+    link.addEventListener("click", () => {
+      document.getElementById("navLinks").classList.remove("active");
+    });
+  });
+
+  // Global Mouse Aura Tracking
+  const mouseAura = document.getElementById('mouse-aura');
+  document.body.addEventListener('mousemove', (e) => {
+    mouseAura.style.opacity = '1';
+    mouseAura.style.left = `${e.clientX}px`;
+    mouseAura.style.top = `${e.clientY}px`;
+  });
+  document.body.addEventListener('mouseleave', () => {
+    mouseAura.style.opacity = '0';
+  });
+
+  // Interactive Card Spotlight Tracking
+  document.querySelectorAll('.interactive-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      card.style.setProperty('--mouse-x', `${x}px`);
+      card.style.setProperty('--mouse-y', `${y}px`);
+    });
+  });
+
+  // Spreadsheet API Form Submission
+  // Replace this URL with your Google Apps Script URL or SheetDB API URL
+  const scriptURL = 'YOUR_SPREADSHEET_API_URL_HERE';
+  const form = document.forms['contact-form'];
+  const submitBtn = document.getElementById('submit-btn');
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    
+    // Check if the URL was updated
+    if(scriptURL === 'https://script.google.com/macros/s/AKfycbw6Kw6e1u-4iv1htgY0I02BwlK7GfqxCPv66BmtChWZ0ysJm0xPsBgcVMd3dps4ZiYC9A/exec') {
+      alert("Please update the 'scriptURL' in the HTML file with your actual Spreadsheet API URL.");
+      return;
+    }
+
+    submitBtn.innerText = "Submitting...";
+    
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => {
+        alert("Thank you! Your request has been saved successfully.");
+        form.reset();
+        submitBtn.innerText = "Submit Request";
+      })
+      .catch(error => {
+        console.error('Error!', error.message);
+        alert("Oops! Something went wrong while saving.");
+        submitBtn.innerText = "Submit Request";
+      });
+  });
+</script>
+
+</body>
+</html>
