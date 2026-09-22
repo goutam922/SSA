@@ -803,7 +803,8 @@
     }
   });
 
-  const scriptURL = 'YOUR_SPREADSHEET_API_URL_HERE';
+  // --- SPREADSHEET FORM SUBMISSION HANDLER ---
+  const scriptURL = 'YOUR_SPREADSHEET_API_URL_HERE'; // <-- Replace with your Google Apps Script URL
   const form = document.forms['contact-form'];
   const submitBtn = document.getElementById('submit-btn');
 
@@ -811,23 +812,27 @@
     e.preventDefault();
     
     if(scriptURL === 'https://script.google.com/macros/s/AKfycbw6Kw6e1u-4iv1htgY0I02BwlK7GfqxCPv66BmtChWZ0ysJm0xPsBgcVMd3dps4ZiYC9A/exec') {
-      alert("Please update the 'scriptURL' in the HTML file with your actual Google Sheet/API URL.");
+      alert("Please update the 'scriptURL' in the HTML code with your Google Apps Script Web App URL.");
       return;
     }
 
     submitBtn.innerText = "Submitting...";
     
-    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-      .then(response => {
-        alert("Thank you! Your request has been saved successfully.");
-        form.reset();
-        submitBtn.innerText = "Submit Request";
-      })
-      .catch(error => {
-        console.error('Error!', error.message);
-        alert("Oops! Something went wrong while saving.");
-        submitBtn.innerText = "Submit Request";
-      });
+    fetch(scriptURL, { 
+      method: 'POST', 
+      mode: 'no-cors', 
+      body: new FormData(form)
+    })
+    .then(() => {
+      alert("Thank you! Your request has been saved successfully.");
+      form.reset();
+      submitBtn.innerText = "Submit Request";
+    })
+    .catch(error => {
+      console.error('Error!', error.message);
+      alert("Oops! Something went wrong while saving.");
+      submitBtn.innerText = "Submit Request";
+    });
   });
 </script>
 
