@@ -90,6 +90,7 @@
     .logo {
       display: flex;
       align-items: center;
+      gap: 12px; /* Adds spacing between logo and text */
       transition: transform 0.3s ease;
     }
     
@@ -98,9 +99,17 @@
     }
 
     .logo img {
-      height: 55px; 
+      height: 45px; 
       width: auto;
       object-fit: contain;
+    }
+
+    .logo-text {
+      font-family: 'Manrope', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text-main);
+      letter-spacing: -0.5px;
     }
 
     .nav-links {
@@ -535,8 +544,10 @@
 <header id="header">
   <div class="container">
     <nav>
+      <!-- Logo image combined with brand name text at the starting position -->
       <a href="#home" class="logo">
         <img src="watermarked_img_438985077642189029.png" alt="Shree Shyam Accounts Logo">
+        <span class="logo-text">Shree Shyam Accounts</span>
       </a>
       <div class="menu" onclick="toggleMenu()">☰</div>
       <div class="nav-links" id="navLinks">
@@ -804,18 +815,13 @@
   });
 
   // --- SPREADSHEET FORM SUBMISSION HANDLER ---
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbw6Kw6e1u-4iv1htgY0I02BwlK7GfqxCPv66BmtChWZ0ysJm0xPsBgcVMd3dps4ZiYC9A/exec'; // <-- Replace with your Google Apps Script URL
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbw6Kw6e1u-4iv1htgY0I02BwlK7GfqxCPv66BmtChWZ0ysJm0xPsBgcVMd3dps4ZiYC9A/exec';
   const form = document.forms['contact-form'];
   const submitBtn = document.getElementById('submit-btn');
 
   form.addEventListener('submit', e => {
     e.preventDefault();
     
-    if(scriptURL === 'https://script.google.com/macros/s/AKfycbw6Kw6e1u-4iv1htgY0I02BwlK7GfqxCPv66BmtChWZ0ysJm0xPsBgcVMd3dps4ZiYC9A/exechttps://script.google.com/macros/s/AKfycbw6Kw6e1u-4iv1htgY0I02BwlK7GfqxCPv66BmtChWZ0ysJm0xPsBgcVMd3dps4ZiYC9A/exec') {
-      alert("Please update the 'scriptURL' in the HTML code with your Google Apps Script Web App URL.");
-      return;
-    }
-
     submitBtn.innerText = "Submitting...";
     
     fetch(scriptURL, { 
